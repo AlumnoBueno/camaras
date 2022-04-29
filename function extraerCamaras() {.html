@@ -1,0 +1,47 @@
+function extraerCamaras() {
+
+    var obj_peticion = new XMLHttpRequest();
+    obj_peticion.onreadystatechange = function() {
+        if (obj_peticion.readyState == 4 && obj_peticion.status == 200) {
+            var obj_xml=obj_peticion.responseXML;
+            var lista_autores=obj_xml.getElementsByTagName("autor");
+            pintar_tabla(obj_peticion.responseXML)
+            }
+            }
+            obj_peticion.open("GET", "camaras.xml");
+            obj_peticion.send();
+            }
+            function pintar_tabla(xml){
+                var num_latitud=xml.getElementsByTagName("latitud");
+                var num_longitud=xml.getElementsByTagName("longitud");
+                var ruta=xml.getElementsByTagName("URL");
+                var objeto_tabla=document.createElement("table");
+                for (i=0; i
+                var objeto_fila=document.createElement("tr");
+var celda_latitud=document.createElement("td");
+var celda_longitud=document.createElement("td");
+var celdqa_imagen=document.createElement("td");
+var imagen=document.createElement("img");
+
+
+var lati=num_latitud[i].childNodes[0].nodeValue;
+var long=titulos[i].childNodes[0].nodeValue;
+var img=ruta[i].childNodes[0].nodeValue;
+imagen.src= "https://"+ruta_img;
+celda_latitud.innerHTML=lati;
+celda_longitud.innerHTML=long;
+
+celda_imagen.appendChild(imagen);
+
+objeto_fila.appendChild(celda_latitud);
+objeto_fila.appendChild(celda_longitud);
+objeto_fila.appendChild(celda_imagen);
+
+objeto_tabla.appendChild(objeto_fila);
+document.getElementById("conternedor_tabla").appendChild(objeto_tabla);
+
+}
+
+
+
+}
